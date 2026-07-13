@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/stat_card.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -8,7 +9,6 @@ class Dashboard extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(25),
-      color: Colors.grey.shade100,
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,41 +16,47 @@ class Dashboard extends StatelessWidget {
         children: [
 
           const Text(
-            'Dashboard',
+            "R&D Dashboard",
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 25),
 
 
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
+          Wrap(
+            spacing: 20,
+            runSpacing: 20,
 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
 
-                children: const [
-
-                  Text(
-                    'Welcome to IIIT Guwahati R&D Management System',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  Text(
-                    'Manage Sponsored Projects, Consultancy, Procurement, Startups and Reports.',
-                  ),
-
-                ],
+              StatCard(
+                title: "Sponsored Projects",
+                value: "47",
+                icon: Icons.folder,
               ),
-            ),
+
+              StatCard(
+                title: "Consultancy",
+                value: "₹162 Lakh",
+                icon: Icons.handshake,
+              ),
+
+              StatCard(
+                title: "Project Staff",
+                value: "35",
+                icon: Icons.people,
+              ),
+
+              StatCard(
+                title: "Startups",
+                value: "5",
+                icon: Icons.rocket_launch,
+              ),
+
+            ],
           ),
 
         ],

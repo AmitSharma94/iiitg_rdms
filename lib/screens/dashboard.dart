@@ -1,3 +1,4 @@
+import '../widgets/quick_actions.dart';
 import 'package:flutter/material.dart';
 import '../widgets/stat_card.dart';
 import '../widgets/activity_panel.dart';
@@ -65,6 +66,8 @@ class Dashboard extends StatelessWidget {
 
 
           const ActivityPanel(),
+          
+          const QuickActions(),
 
         ],
       ),

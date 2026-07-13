@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/stat_card.dart';
+import '../widgets/activity_panel.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -58,6 +59,12 @@ class Dashboard extends StatelessWidget {
 
             ],
           ),
+
+
+          const SizedBox(height: 30),
+
+
+          const ActivityPanel(),
 
         ],
       ),

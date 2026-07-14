@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'widgets/live_datetime.dart';
 import 'widgets/sidebar.dart';
 import 'screens/dashboard.dart';
+import 'widgets/global_search.dart';
 
 void main() {
   runApp(const IIITGRDMS());
@@ -33,6 +34,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
+        elevation: 2,
 
         title: const Text(
           'IIITG R&D Management System',
@@ -42,21 +44,37 @@ class HomePage extends StatelessWidget {
         ),
 
         actions: [
+
+          // Global Search
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Global Search',
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: GlobalSearch(),
+              );
+            },
+          ),
+
+          // Live Date & Time
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 12),
             child: Center(
               child: LiveDateTime(),
             ),
           ),
 
+          // Notifications
           IconButton(
             icon: const Icon(Icons.notifications),
             tooltip: 'Notifications',
             onPressed: () {},
           ),
 
+          // User Profile
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: Icon(
@@ -71,6 +89,7 @@ class HomePage extends StatelessWidget {
       body: const Row(
         children: [
           Sidebar(),
+
           Expanded(
             child: Dashboard(),
           ),

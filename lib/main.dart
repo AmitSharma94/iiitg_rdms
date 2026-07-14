@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'widgets/live_datetime.dart';
+
 import 'widgets/sidebar.dart';
-import 'screens/dashboard.dart';
+import 'widgets/live_datetime.dart';
 import 'widgets/global_search.dart';
+import 'screens/dashboard.dart';
+import 'utils/responsive.dart';
 
 void main() {
   runApp(const IIITGRDMS());
@@ -30,7 +32,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = Responsive.isMobile(context);
+
     return Scaffold(
+      drawer: isMobile
+          ? const Drawer(
+              child: SafeArea(
+                child: Sidebar(),
+              ),
+            )
+          : null,
+
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -44,11 +56,10 @@ class HomePage extends StatelessWidget {
         ),
 
         actions: [
-
           // Global Search
           IconButton(
+            tooltip: 'Search',
             icon: const Icon(Icons.search),
-            tooltip: 'Global Search',
             onPressed: () {
               showSearch(
                 context: context,
@@ -57,24 +68,25 @@ class HomePage extends StatelessWidget {
             },
           ),
 
-          // Live Date & Time
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Center(
-              child: LiveDateTime(),
+          // Show clock only on tablet/desktop
+          if (!isMobile)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Center(
+                child: LiveDateTime(),
+              ),
             ),
-          ),
 
           // Notifications
           IconButton(
-            icon: const Icon(Icons.notifications),
             tooltip: 'Notifications',
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
 
-          // User Profile
+          // User Avatar
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 12),
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: Icon(
@@ -83,18 +95,21 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+
+          const SizedBox(width: 8),
         ],
       ),
 
-      body: const Row(
-        children: [
-          Sidebar(),
-
-          Expanded(
-            child: Dashboard(),
-          ),
-        ],
-      ),
+      body: isMobile
+          ? const Dashboard()
+          : const Row(
+              children: [
+                Sidebar(),
+                Expanded(
+                  child: Dashboard(),
+                ),
+              ],
+            ),
     );
   }
 }
